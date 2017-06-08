@@ -153,7 +153,7 @@ class LaravelGenerator extends AbstractGenerator
     {
         $reflection = new ReflectionClass($className);
 
-        if (!$reflection->hasMethod('__construct')) {
+        if (! $reflection->hasMethod('__construct')) {
             return new $className();
         }
 
@@ -162,7 +162,7 @@ class LaravelGenerator extends AbstractGenerator
         $params = [];
 
         foreach ($reflectionMethod->getParameters() as $parameter) {
-            if (!is_null($parameter->getClass())) {
+            if (! is_null($parameter->getClass())) {
                 $params[] = app($parameter->getClass()->getName());
             } elseif ($parameter->isDefaultValueAvailable()) {
                 $params[] = $parameter->getDefaultValue();
